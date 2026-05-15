@@ -1,10 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { nbaService, api } from "@/services/api";
+import { api } from "@/services/api";
+import type { Team } from "@/types/nba";
 
 export function useRankingAtaque(n = 30, conferencia?: string) {
   return useQuery({
     queryKey: ["rankings", "ataque", n, conferencia],
-    queryFn: () => nbaService.getRankingAtaque(n, conferencia),
+    queryFn: () =>
+      api
+        .get<{ total: number; ranking_ataque: Team[] }>("/rankings/ataque", {
+          params: { n, conferencia },
+        })
+        .then((r) => r.data),
     staleTime: 60_000,
   });
 }
@@ -12,7 +18,12 @@ export function useRankingAtaque(n = 30, conferencia?: string) {
 export function useRankingDefesa(n = 30, conferencia?: string) {
   return useQuery({
     queryKey: ["rankings", "defesa", n, conferencia],
-    queryFn: () => nbaService.getRankingDefesa(n, conferencia),
+    queryFn: () =>
+      api
+        .get<{ total: number; ranking_defesa: Team[] }>("/rankings/defesa", {
+          params: { n, conferencia },
+        })
+        .then((r) => r.data),
     staleTime: 60_000,
   });
 }
