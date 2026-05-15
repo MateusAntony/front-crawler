@@ -1,5 +1,5 @@
 import axios from "axios";
-import { StandingsResponse,ConferenciaResponse,CompareResponse,RankingResponse,Team} from "@/types/nba";
+import { StandingsResponse,ConferenciaResponse,CompareResponse,Team} from "@/types/nba";
 
 
 export const api = axios.create({
@@ -40,12 +40,12 @@ export const nbaService = {
         api.get<{ total: number, times: Team[] }>(`/standings/eliminados`, { params: { conferencia } })
         .then((r) => r.data),
 
-    getRankingAtaque: (n=30, conferencia: string) =>
-        api.get<{ total: number, times: Team[] }>(`/rankings/ataque`, { params: { n, conferencia } })
+    getRankingAtaque: (n = 30, conferencia?: string) =>
+        api.get<{ total: number; ranking_ataque: Team[] }>(`/rankings/ataque`, { params: { n, conferencia } })
         .then((r) => r.data),
 
-    getRankingDefesa: (n=30, conferencia: string) =>
-        api.get<{ total: number, times: Team[] }>(`/rankings/defesa`, { params: { n, conferencia } })
+    getRankingDefesa: (n = 30, conferencia?: string) =>
+        api.get<{ total: number; ranking_defesa: Team[] }>(`/rankings/defesa`, { params: { n, conferencia } })
         .then((r) => r.data),
 
     comparar: (time1: string, time2: string) =>
