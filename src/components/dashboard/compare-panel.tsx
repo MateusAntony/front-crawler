@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeftRight, TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { ArrowLeftRight, TrendingUp, Minus } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SectionHeader } from "@/components/ui/section-header";
 import { useCompare } from "@/hooks/useCompare";
@@ -111,16 +110,12 @@ export function ComparePanel({ teamNames }: ComparePanelProps) {
             </div>
         
             {/* linhas */}
-            {STAT_ROWS.map(({ key, label, better, fmt }) => {
+            {STAT_ROWS.map((row) => {
+              const { key, label, better } = row;
+              const fmt = "fmt" in row ? row.fmt : undefined;
               const w = winner(key, better);
-              const v1 = formatVal(
-                Number(team1[key as keyof Team]),
-                fmt
-              );
-              const v2 = formatVal(
-                Number(team2[key as keyof Team]),
-                fmt
-              );
+              const v1 = formatVal(Number(team1[key as keyof Team]), fmt);
+              const v2 = formatVal(Number(team2[key as keyof Team]), fmt);
 
               return (
                 <div
