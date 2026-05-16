@@ -33,7 +33,7 @@ export function useRankingCasa(conferencia?: string) {
     queryKey: ["rankings", "casa", conferencia],
     queryFn: () =>
       api
-        .get<{ total: number; ranking_casa: any[] }>("/standings/casa", {
+        .get<{ total: number; ranking_casa: Team[] }>("/standings/casa", {
           params: { conferencia },
         })
         .then((r) => r.data),
@@ -46,7 +46,7 @@ export function useRankingFora(conferencia?: string) {
     queryKey: ["rankings", "fora", conferencia],
     queryFn: () =>
       api
-        .get<{ total: number; ranking_fora: any[] }>("/standings/fora", {
+        .get<{ total: number; ranking_fora: Team[] }>("/standings/fora", {
           params: { conferencia },
         })
         .then((r) => r.data),
@@ -59,7 +59,7 @@ export function useDivisao(nome: string) {
     queryKey: ["divisao", nome],
     queryFn: () =>
       api
-        .get<{ divisao: string; total: number; times: any[] }>(
+        .get<{ divisao: string; total: number; times: Team[] }>(
           `/standings/divisao/${nome}`
         )
         .then((r) => r.data),

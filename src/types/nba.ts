@@ -12,6 +12,8 @@ export interface Team {
     media_pontos_sofridos: number;
     situacao: string;
     data_coleta?: string;
+    vitorias_casa?: number;  
+    vitorias_fora?: number;
 }
 
 export interface StandingsResponse{
