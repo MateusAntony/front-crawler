@@ -66,8 +66,9 @@ function AtaqueDefesaPanel() {
   const { data: ataqueData, isLoading: loadingAtaque } = useRankingAtaque(10);
   const { data: defesaData, isLoading: loadingDefesa } = useRankingDefesa(10);
 
-  const ataque = (ataqueData as any)?.ranking_ataque ?? [];
-  const defesa = (defesaData as any)?.ranking_defesa ?? [];
+
+  const ataque = ataqueData?.ranking_ataque ?? [];
+  const defesa = defesaData?.ranking_defesa ?? [];
 
   const maxAtaque = ataque[0]?.media_pontos_marcados ?? 1;
   const maxDefesa = defesa.length
